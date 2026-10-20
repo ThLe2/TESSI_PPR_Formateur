@@ -1,0 +1,50 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Qui émet quoi ? — TMK Performances</title>
+<style>
+:root{--navy:#0d2b56;--gold:#c8a96b;--blue:#0f4c81;--sky:#e8f1fc;--red:#b3261e;--ok:#1f7a4a;--ink:#1d2433}
+*{box-sizing:border-box}body{margin:0;font-family:Nunito,"Segoe UI",Arial,sans-serif;color:var(--ink);background:#f5f7fb}
+header{background:var(--navy);color:#fff;padding:14px 20px;border-bottom:5px solid var(--gold);display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px}
+header b{font-family:Fraunces,Georgia,serif;font-size:20px}header span{font-size:13px;opacity:.9}
+.fictif{background:var(--red);color:#fff;text-align:center;font-size:11px;font-weight:700;letter-spacing:1.5px;padding:4px}
+main{max-width:860px;margin:0 auto;padding:22px 16px 40px}
+h1{font-family:Fraunces,Georgia,serif;color:var(--navy);margin:4px 0 6px;font-size:28px}
+.consigne{background:#fbf7ef;border-left:5px solid var(--gold);padding:10px 14px;margin:10px 0 18px}
+.prog{display:flex;justify-content:space-between;font-size:14px;color:var(--blue);font-weight:700;margin-bottom:6px}
+.bar{height:8px;background:#dfe6f1;border-radius:4px;overflow:hidden;margin-bottom:18px}.bar i{display:block;height:100%;background:var(--gold);width:0;transition:width .3s}
+.q{background:#fff;border:1px solid #d6deea;border-radius:8px;padding:16px 18px;margin-bottom:14px}
+.q .t{font-weight:700;margin-bottom:10px}.q .t small{color:var(--blue);margin-right:6px}
+label{display:block;padding:9px 12px;border:1px solid #d6deea;border-radius:6px;margin:6px 0;cursor:pointer;background:#fff}
+label:hover{background:var(--sky)}input{margin-right:8px}
+label.bon{border-color:var(--ok);background:#e9f6ef}label.faux{border-color:var(--red);background:#fbedec}
+button{font:700 14px Nunito,Arial,sans-serif;background:var(--navy);color:#fff;border:0;border-radius:6px;padding:9px 18px;cursor:pointer;margin-top:8px}
+button:disabled{background:#8a96aa;cursor:default}
+.fb{margin-top:10px;padding:10px 12px;border-radius:6px;display:none}.fb.ok{display:block;background:#e9f6ef;border-left:4px solid var(--ok)}.fb.ko{display:block;background:#fbedec;border-left:4px solid var(--red)}
+.fin{display:none;background:var(--navy);color:#fff;border-radius:8px;padding:20px;text-align:center;margin-top:18px}
+.fin .s{font-family:Fraunces,Georgia,serif;font-size:36px;color:var(--gold)}.fin button{background:var(--gold);color:var(--navy)}
+footer{text-align:center;font-size:12px;color:#666;padding:16px}
+</style></head><body>
+<header><b>TMK Performances</b><span>Pratique pro du gestionnaire retraite · J1 · Séquence 1</span></header><div class="fictif">DOCUMENT FICTIF À USAGE PÉDAGOGIQUE</div>
+<main><h1>Qui émet quoi ?</h1><div class="consigne">Pour chaque pièce, choisissez l'organisme qui la délivre puis validez. Une réponse validée ne peut plus être modifiée.</div>
+<div class="prog"><span id="avc">0 / 0 validée</span><span id="sc">Score : 0</span></div><div class="bar"><i id="br"></i></div>
+<div id="qs"></div>
+<div class="fin" id="fin"><div>Exercice terminé</div><div class="s" id="fs"></div><div id="fm"></div><button id="rejouer">Recommencer l'exercice</button></div></main>
+<footer>TMK Performances - N° Siret : 49841924100027 - Code NAF : 8559A</footer>
+<script>
+const DATA=[{"q": "Qui délivre : <b>le relevé de carrière</b> ?", "o": ["Caisse de retraite de base", "Agirc-Arrco", "Employeur", "France Travail"], "a": 0, "e": "C'est la caisse de retraite de base (Assurance retraite / Carsat, MSA…) qui tient le compte de carrière et édite le relevé."}, {"q": "Qui délivre : <b>le relevé de points de retraite complémentaire</b> ?", "o": ["Agirc-Arrco", "Caisse de retraite de base", "Employeur", "Caisse primaire d'assurance maladie (CPAM)"], "a": 0, "e": "Les points de retraite complémentaire des salariés du privé sont gérés par l'Agirc-Arrco."}, {"q": "Qui délivre : <b>le bulletin de salaire</b> ?", "o": ["Employeur", "Caisse de retraite de base", "Administration fiscale (DGFiP)", "France Travail"], "a": 0, "e": "Le bulletin est établi par l'employeur ; celui de décembre donne le cumul brut annuel."}, {"q": "Qui délivre : <b>le certificat de travail</b> ?", "o": ["Employeur", "France Travail", "Mairie — état civil", "Caisse de retraite de base"], "a": 0, "e": "Remis par l'employeur à la fin du contrat : il prouve la période d'emploi, pas le salaire."}, {"q": "Qui délivre : <b>l'attestation employeur destinée à l'assurance chômage</b> ?", "o": ["Employeur", "France Travail", "Caisse primaire d'assurance maladie (CPAM)", "Tribunal judiciaire"], "a": 0, "e": "Elle est remplie par l'employeur (date et motif de fin de contrat, salaires) puis transmise à France Travail."}, {"q": "Qui délivre : <b>l'attestation de périodes indemnisées</b> ?", "o": ["France Travail", "Employeur", "Caisse primaire d'assurance maladie (CPAM)", "Caisse de retraite de base"], "a": 0, "e": "France Travail atteste les périodes de chômage indemnisé, qui donnent des trimestres assimilés."}, {"q": "Qui délivre : <b>le relevé d'indemnités journalières maladie ou maternité</b> ?", "o": ["Caisse primaire d'assurance maladie (CPAM)", "Caisse de retraite de base", "Employeur", "France Travail"], "a": 0, "e": "Les indemnités journalières sont versées par la CPAM : c'est elle qui atteste les jours indemnisés."}, {"q": "Qui délivre : <b>l'état signalétique et des services</b> ?", "o": ["Ministère des Armées", "Mairie — état civil", "Caisse de retraite de base", "Tribunal judiciaire"], "a": 0, "e": "Le service national est attesté par les archives du ministère des Armées."}, {"q": "Qui délivre : <b>l'acte de mariage</b> ?", "o": ["Mairie — état civil", "Tribunal judiciaire", "Ministère des Armées", "Administration fiscale (DGFiP)"], "a": 0, "e": "Les actes de naissance, de mariage et de décès sont délivrés par le service de l'état civil de la mairie."}, {"q": "Qui délivre : <b>le jugement de divorce</b> ?", "o": ["Tribunal judiciaire", "Mairie — état civil", "Administration fiscale (DGFiP)", "Caisse de retraite de base"], "a": 0, "e": "Le divorce est prononcé par le tribunal judiciaire (hors divorce par consentement mutuel déposé chez un notaire)."}, {"q": "Qui délivre : <b>l'avis d'impôt sur le revenu</b> ?", "o": ["Administration fiscale (DGFiP)", "Banque", "Caisse primaire d'assurance maladie (CPAM)", "Caisse de retraite de base"], "a": 0, "e": "L'avis d'impôt est émis par l'administration fiscale ; il renseigne sur les ressources du foyer."}, {"q": "Qui délivre : <b>le relevé d'identité bancaire</b> ?", "o": ["Banque", "Administration fiscale (DGFiP)", "Caisse de retraite de base", "Employeur"], "a": 0, "e": "Le RIB est fourni par la banque : il sert au paiement de la pension."}];
+let fait=0,score=0;
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function maj(){document.getElementById('avc').textContent=fait+' / '+DATA.length+' validée'+(fait>1?'s':'');
+document.getElementById('sc').textContent='Score : '+score;document.getElementById('br').style.width=(100*fait/DATA.length)+'%';
+if(fait===DATA.length){const f=document.getElementById('fin');f.style.display='block';document.getElementById('fs').textContent=score+' / '+DATA.length;
+const r=score/DATA.length;document.getElementById('fm').textContent=r>=.8?'Très bonne maîtrise des notions de la journée.':r>=.5?'Les bases sont là : relisez les explications des questions manquées.':'Reprenez les règles de lecture du book avant la journée suivante.';f.scrollIntoView({behavior:'smooth'})}}
+function rendre(){const box=document.getElementById('qs');box.innerHTML='';fait=0;score=0;document.getElementById('fin').style.display='none';
+DATA.forEach((d,n)=>{const ordre=shuffle(d.o.map((t,i)=>i));const q=document.createElement('div');q.className='q';
+q.innerHTML='<div class="t"><small>Q'+(n+1)+'</small>'+d.q+'</div>'+ordre.map(i=>'<label><input type="radio" name="q'+n+'" value="'+i+'">'+d.o[i]+'</label>').join('')+'<button>Valider</button><div class="fb"></div>';
+const btn=q.querySelector('button'),fb=q.querySelector('.fb');
+btn.onclick=()=>{const c=q.querySelector('input:checked');if(!c){fb.className='fb ko';fb.textContent='Choisissez une réponse avant de valider.';return}
+const v=+c.value,bon=v===d.a;q.querySelectorAll('input').forEach(x=>{x.disabled=true;const l=x.parentNode;if(+x.value===d.a)l.classList.add('bon');else if(x.checked)l.classList.add('faux')});
+btn.disabled=true;btn.textContent='Atelier validé';fb.className='fb '+(bon?'ok':'ko');fb.innerHTML='<b>'+(bon?'Bonne réponse.':'Ce n\'est pas la bonne réponse.')+'</b> '+d.e;
+fait++;if(bon)score++;maj()};box.appendChild(q)});maj()}
+document.getElementById('rejouer').onclick=()=>{rendre();window.scrollTo({top:0,behavior:'smooth'})};
+rendre();
+</script></body></html>
