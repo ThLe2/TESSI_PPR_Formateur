@@ -1,0 +1,50 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Synthèse de la journée — TMK Performances</title>
+<style>
+:root{--navy:#0d2b56;--gold:#c8a96b;--blue:#0f4c81;--sky:#e8f1fc;--red:#b3261e;--ok:#1f7a4a;--ink:#1d2433}
+*{box-sizing:border-box}body{margin:0;font-family:Nunito,"Segoe UI",Arial,sans-serif;color:var(--ink);background:#f5f7fb}
+header{background:var(--navy);color:#fff;padding:14px 20px;border-bottom:5px solid var(--gold);display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px}
+header b{font-family:Fraunces,Georgia,serif;font-size:20px}header span{font-size:13px;opacity:.9}
+.fictif{background:var(--red);color:#fff;text-align:center;font-size:11px;font-weight:700;letter-spacing:1.5px;padding:4px}
+main{max-width:860px;margin:0 auto;padding:22px 16px 40px}
+h1{font-family:Fraunces,Georgia,serif;color:var(--navy);margin:4px 0 6px;font-size:28px}
+.consigne{background:#fbf7ef;border-left:5px solid var(--gold);padding:10px 14px;margin:10px 0 18px}
+.prog{display:flex;justify-content:space-between;font-size:14px;color:var(--blue);font-weight:700;margin-bottom:6px}
+.bar{height:8px;background:#dfe6f1;border-radius:4px;overflow:hidden;margin-bottom:18px}.bar i{display:block;height:100%;background:var(--gold);width:0;transition:width .3s}
+.q{background:#fff;border:1px solid #d6deea;border-radius:8px;padding:16px 18px;margin-bottom:14px}
+.q .t{font-weight:700;margin-bottom:10px}.q .t small{color:var(--blue);margin-right:6px}
+label{display:block;padding:9px 12px;border:1px solid #d6deea;border-radius:6px;margin:6px 0;cursor:pointer;background:#fff}
+label:hover{background:var(--sky)}input{margin-right:8px}
+label.bon{border-color:var(--ok);background:#e9f6ef}label.faux{border-color:var(--red);background:#fbedec}
+button{font:700 14px Nunito,Arial,sans-serif;background:var(--navy);color:#fff;border:0;border-radius:6px;padding:9px 18px;cursor:pointer;margin-top:8px}
+button:disabled{background:#8a96aa;cursor:default}
+.fb{margin-top:10px;padding:10px 12px;border-radius:6px;display:none}.fb.ok{display:block;background:#e9f6ef;border-left:4px solid var(--ok)}.fb.ko{display:block;background:#fbedec;border-left:4px solid var(--red)}
+.fin{display:none;background:var(--navy);color:#fff;border-radius:8px;padding:20px;text-align:center;margin-top:18px}
+.fin .s{font-family:Fraunces,Georgia,serif;font-size:36px;color:var(--gold)}.fin button{background:var(--gold);color:var(--navy)}
+footer{text-align:center;font-size:12px;color:#666;padding:16px}
+</style></head><body>
+<header><b>TMK Performances</b><span>Pratique pro du gestionnaire retraite · J3 · Séquence 7</span></header><div class="fictif">DOCUMENT FICTIF À USAGE PÉDAGOGIQUE</div>
+<main><h1>Synthèse de la journée</h1><div class="consigne">Répondez à chaque question puis validez. Une réponse validée ne peut plus être modifiée ; vous pouvez relancer l'exercice en entier à la fin.</div>
+<div class="prog"><span id="avc">0 / 0 validée</span><span id="sc">Score : 0</span></div><div class="bar"><i id="br"></i></div>
+<div id="qs"></div>
+<div class="fin" id="fin"><div>Exercice terminé</div><div class="s" id="fs"></div><div id="fm"></div><button id="rejouer">Recommencer l'exercice</button></div></main>
+<footer>TMK Performances - N° Siret : 49841924100027 - Code NAF : 8559A</footer>
+<script>
+const DATA=[{"q": "Quels régimes relèvent de la liquidation unique ?", "o": ["Régime général, salariés agricoles, artisans et commerçants", "Tous les régimes de base", "Régime général et fonction publique", "Régime général et professions libérales"], "a": 0, "e": "Ce sont les régimes « alignés » ; fonctionnaires, libéraux et exploitants agricoles calculent leur propre pension."}, {"q": "Un salarié devenu professeur titulaire percevra combien de pensions de base ?", "o": ["Deux", "Une seule", "Trois", "Aucune avant 67 ans"], "a": 0, "e": "La fonction publique n'est pas un régime aligné : régime général + service des retraites de l'État."}, {"q": "En liquidation unique, que fait-on des revenus d'une même année dans deux régimes alignés ?", "o": ["On les additionne, dans la limite du PASS", "On garde le plus élevé", "On les compte comme deux années", "On les ignore"], "a": 0, "e": "Ils s'additionnent pour former le revenu de l'année, plafonné au PASS."}, {"q": "La liquidation unique s'applique-t-elle aux retraites complémentaires ?", "o": ["Non, chaque complémentaire verse sa propre retraite", "Oui, toutes sont fusionnées", "Seulement pour l'Agirc-Arrco", "Seulement pour les artisans"], "a": 0, "e": "Elle ne concerne que la retraite de base."}, {"q": "Combien de trimestres de majoration pour un enfant né en 1993 ?", "o": ["8 pour la mère", "4 pour la mère, 4 pour le père", "4 pour la mère", "Aucun"], "a": 0, "e": "Avant 2010 : 8 trimestres pour la mère (maternité + éducation)."}, {"q": "Pour un enfant né en 2015, sans option des parents, à qui vont les trimestres d'éducation ?", "o": ["À la mère", "Au père", "Partagés par moitié", "À personne"], "a": 0, "e": "Faute d'option dans les délais, ils sont attribués à la mère."}, {"q": "Qu'apporte la majoration de 10 % ?", "o": ["Une hausse du montant de la pension pour au moins 3 enfants", "Des trimestres supplémentaires", "Une baisse de l'âge légal", "Des points complémentaires gratuits"], "a": 0, "e": "Elle augmente le montant, à partir de trois enfants ; ce n'est pas une majoration de durée."}, {"q": "Les trimestres de majoration pour enfant comptent-ils comme trimestres cotisés pour une carrière longue ?", "o": ["Non", "Oui, tous", "Oui, dans la limite de 4", "Seulement pour les pères"], "a": 0, "e": "Ils comptent dans la durée d'assurance, pas dans la durée cotisée exigée pour une carrière longue."}, {"q": "Une assurée née en juin a validé 5 trimestres avant la fin de l'année de ses 20 ans. Que faites-vous ?", "o": ["Je repère le signal et je déclenche l'étude carrière longue", "Je lui annonce un départ à 60 ans", "Je ne fais rien", "Je classe le dossier"], "a": 0, "e": "Le signal ne vaut pas droit : il faut vérifier la durée cotisée et l'âge selon la génération."}, {"q": "Quel organisme verse la retraite de base d'un fonctionnaire territorial ?", "o": ["La CNRACL", "L'Assurance retraite", "L'Agirc-Arrco", "La MSA"], "a": 0, "e": "Fonction publique territoriale et hospitalière : CNRACL."}, {"q": "Une période de chômage indemnisé ouvre-t-elle des droits en retraite complémentaire ?", "o": ["Oui, elle donne des points Agirc-Arrco", "Non, jamais", "Seulement au-delà de 2 ans", "Seulement pour les cadres"], "a": 0, "e": "Les périodes de chômage indemnisé ouvrent droit à des points ; leur absence sur un relevé est à faire régulariser."}, {"q": "Dans un courriel à un organisme partenaire, que faut-il impérativement indiquer ?", "o": ["La référence de l'assuré, le constat précis, la pièce jointe et l'échéance", "Seulement le nom de l'assuré", "Le montant de sa pension", "Ses coordonnées bancaires"], "a": 0, "e": "L'organisme doit pouvoir identifier le dossier et agir sans vous rappeler."}];
+let fait=0,score=0;
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function maj(){document.getElementById('avc').textContent=fait+' / '+DATA.length+' validée'+(fait>1?'s':'');
+document.getElementById('sc').textContent='Score : '+score;document.getElementById('br').style.width=(100*fait/DATA.length)+'%';
+if(fait===DATA.length){const f=document.getElementById('fin');f.style.display='block';document.getElementById('fs').textContent=score+' / '+DATA.length;
+const r=score/DATA.length;document.getElementById('fm').textContent=r>=.8?'Très bonne maîtrise des notions de la journée.':r>=.5?'Les bases sont là : relisez les explications des questions manquées.':'Reprenez les règles de lecture du book avant la journée suivante.';f.scrollIntoView({behavior:'smooth'})}}
+function rendre(){const box=document.getElementById('qs');box.innerHTML='';fait=0;score=0;document.getElementById('fin').style.display='none';
+DATA.forEach((d,n)=>{const ordre=shuffle(d.o.map((t,i)=>i));const q=document.createElement('div');q.className='q';
+q.innerHTML='<div class="t"><small>Q'+(n+1)+'</small>'+d.q+'</div>'+ordre.map(i=>'<label><input type="radio" name="q'+n+'" value="'+i+'">'+d.o[i]+'</label>').join('')+'<button>Valider</button><div class="fb"></div>';
+const btn=q.querySelector('button'),fb=q.querySelector('.fb');
+btn.onclick=()=>{const c=q.querySelector('input:checked');if(!c){fb.className='fb ko';fb.textContent='Choisissez une réponse avant de valider.';return}
+const v=+c.value,bon=v===d.a;q.querySelectorAll('input').forEach(x=>{x.disabled=true;const l=x.parentNode;if(+x.value===d.a)l.classList.add('bon');else if(x.checked)l.classList.add('faux')});
+btn.disabled=true;btn.textContent='Atelier validé';fb.className='fb '+(bon?'ok':'ko');fb.innerHTML='<b>'+(bon?'Bonne réponse.':'Ce n\'est pas la bonne réponse.')+'</b> '+d.e;
+fait++;if(bon)score++;maj()};box.appendChild(q)});maj()}
+document.getElementById('rejouer').onclick=()=>{rendre();window.scrollTo({top:0,behavior:'smooth'})};
+rendre();
+</script></body></html>
