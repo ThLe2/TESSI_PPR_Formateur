@@ -1,0 +1,61 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plan d'épargne retraite — traiter les demandes — TMK Performances</title><style>
+:root{--navy:#0d2b56;--gold:#c8a96b;--blue:#0f4c81;--sky:#e8f1fc;--red:#b3261e;--ok:#1f7a4a;--ink:#1d2433}
+*{box-sizing:border-box}body{margin:0;font-family:Nunito,"Segoe UI",Arial,sans-serif;color:var(--ink);background:#f5f7fb}
+header{background:var(--navy);color:#fff;padding:14px 20px;border-bottom:5px solid var(--gold);display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px}
+header b{font-family:Fraunces,Georgia,serif;font-size:20px}header span{font-size:13px;opacity:.9}
+.fictif{background:var(--red);color:#fff;text-align:center;font-size:11px;font-weight:700;letter-spacing:1.5px;padding:4px}
+main{max-width:860px;margin:0 auto;padding:22px 16px 40px}
+h1{font-family:Fraunces,Georgia,serif;color:var(--navy);margin:4px 0 6px;font-size:28px}
+.consigne{background:#fbf7ef;border-left:5px solid var(--gold);padding:10px 14px;margin:10px 0 18px}
+.prog{display:flex;justify-content:space-between;font-size:14px;color:var(--blue);font-weight:700;margin-bottom:6px}
+.bar{height:8px;background:#dfe6f1;border-radius:4px;overflow:hidden;margin-bottom:18px}.bar i{display:block;height:100%;background:var(--gold);width:0;transition:width .3s}
+.q{background:#fff;border:1px solid #d6deea;border-radius:8px;padding:16px 18px;margin-bottom:14px}
+.q .t{font-weight:700;margin-bottom:10px}.q .t small{color:var(--blue);margin-right:6px}
+label{display:block;padding:9px 12px;border:1px solid #d6deea;border-radius:6px;margin:6px 0;cursor:pointer;background:#fff}
+label:hover{background:var(--sky)}input{margin-right:8px}
+label.bon{border-color:var(--ok);background:#e9f6ef}label.faux{border-color:var(--red);background:#fbedec}
+button{font:700 14px Nunito,Arial,sans-serif;background:var(--navy);color:#fff;border:0;border-radius:6px;padding:9px 18px;cursor:pointer;margin-top:8px}
+button:disabled{background:#8a96aa;cursor:default}
+.fb{margin-top:10px;padding:10px 12px;border-radius:6px;display:none}.fb.ok{display:block;background:#e9f6ef;border-left:4px solid var(--ok)}.fb.ko{display:block;background:#fbedec;border-left:4px solid var(--red)}
+.fin{display:none;background:var(--navy);color:#fff;border-radius:8px;padding:20px;text-align:center;margin-top:18px}
+.fin .s{font-family:Fraunces,Georgia,serif;font-size:36px;color:var(--gold)}.fin button{background:var(--gold);color:var(--navy)}
+footer{text-align:center;font-size:12px;color:#666;padding:16px}
+
+.ctx{background:#fff;border:1px solid #d6deea;border-radius:8px;padding:14px 18px;margin-bottom:16px}
+.ctx table{border-collapse:collapse;width:100%;font-size:13px}.ctx th{background:var(--navy);color:#fff;text-align:left;padding:5px 8px}
+.ctx td{padding:4px 8px;border-bottom:1px solid #e3e8f0}.ctx tr:nth-child(even) td{background:var(--sky)}.ctx td.n{text-align:right}
+.ctx details summary{cursor:pointer;font-weight:700;color:var(--blue)}
+.champ{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap}.champ span.l{flex:1 1 300px}
+.champ input,.champ select{font:15px Nunito,Arial,sans-serif;padding:7px 10px;border:1px solid #b9c4d6;border-radius:6px;width:190px}
+.champ.bon input,.champ.bon select{border-color:var(--ok);background:#e9f6ef}.champ.faux input,.champ.faux select{border-color:var(--red);background:#fbedec}
+.champ .att{font-size:13px;color:var(--red);display:none}.champ.faux .att{display:inline}
+.q h3{margin:0 0 8px;font-family:Fraunces,Georgia,serif;color:var(--navy)}
+</style></head><body>
+<header><b>TMK Performances</b><span>Pratique pro du gestionnaire retraite · J5 · Séquence 2</span></header><div class="fictif">DOCUMENT FICTIF À USAGE PÉDAGOGIQUE</div>
+<main><h1>Plan d'épargne retraite — traiter les demandes</h1><div class="consigne">Traitez les demandes liées au PER. Une étape validée ne peut plus être modifiée.</div><div class="ctx"><p>Plafond de déduction : 10 % des revenus d'activité professionnelle de l'année précédente (dans la limite de 8 PASS), avec un minimum de 10 % du PASS. Déblocage anticipé : résidence principale (hors versements obligatoires) et accidents de la vie.</p></div>
+<div class="prog"><span id="avc"></span><span id="sc"></span></div><div class="bar"><i id="br"></i></div>
+<div id="qs"></div>
+<div class="fin" id="fin"><div>Exercice terminé</div><div class="s" id="fs"></div><div id="fm"></div><button id="rejouer">Recommencer l'exercice</button></div></main>
+<footer>TMK Performances - N° Siret : 49841924100027 - Code NAF : 8559A</footer>
+<script>
+const ETAPES=[{"titre": "Étape 1 — Le plafond de déduction de M. DEVOS", "intro": "Revenus d'activité professionnelle 2025 retenus : 44 640 €. PASS 2025 : 47 100 €. Aucun plafond antérieur reportable.", "champs": [{"l": "10 % des revenus professionnels (€)", "r": 4464, "t": 1, "aff": "4 464 €"}, {"l": "Plancher : 10 % du PASS (€)", "r": 4710, "t": 1, "aff": "4 710 €"}, {"l": "Plafond 2026 (€)", "r": 4710, "t": 1, "aff": "4 710 €"}, {"l": "Part non déductible de ses 5 000 € versés (€)", "r": 290, "t": 1, "aff": "290 €"}], "expl": "On retient le plus élevé des deux : 4 710 €. Sur 5 000 € versés, 290 € ne sont pas déductibles."}, {"titre": "Étape 2 — Le déblocage de M. DEVOS", "intro": "Compartiment 1 (versements volontaires) : 18 400 € ; compartiment 3 (versements obligatoires) : 6 200 €. Demande : 24 600 € pour sa résidence principale.", "champs": [{"l": "Montant débloquable (€)", "r": 18400, "t": 1, "aff": "18 400 €"}, {"l": "Pièce à réclamer en priorité", "o": ["L'acte de vente ou une attestation notariale", "Un avis d'impôt", "Un relevé de carrière", "Un certificat de travail"], "r": 0}], "expl": "Les versements obligatoires ne peuvent pas être débloqués pour la résidence principale. Le compromis ne suffit pas : il faut la preuve de l'acquisition."}, {"titre": "Étape 3 — Les autres demandes", "champs": [{"l": "Mme DUMAS : 18 000 € volontaires + 7 500 € obligatoires, achat de sa résidence principale. Montant débloquable (€)", "r": 18000, "t": 1, "aff": "18 000 €"}, {"l": "Un assuré demande un déblocage parce que ses droits au chômage sont épuisés", "o": ["Recevable : c'est un accident de la vie prévu", "Irrecevable", "Recevable seulement après 60 ans"], "r": 0}, {"l": "Un assuré veut débloquer son PER pour acheter une résidence secondaire", "o": ["Recevable", "Irrecevable"], "r": 1}], "expl": "Fin des droits au chômage : cas de déblocage prévu. Résidence secondaire : non, seule la résidence principale est visée."}];
+const NCH=ETAPES.reduce((a,e)=>a+e.champs.length,0);let fait=0,score=0;
+function num(v){return parseFloat(String(v).replace(/\s| |€|%/g,'').replace(',','.'))}
+function maj(){document.getElementById('avc').textContent=fait+' / '+ETAPES.length+' étape'+(ETAPES.length>1?'s':'')+' validée'+(fait>1?'s':'');
+document.getElementById('sc').textContent='Score : '+score+' / '+NCH;document.getElementById('br').style.width=(100*fait/ETAPES.length)+'%';
+if(fait===ETAPES.length){const f=document.getElementById('fin');f.style.display='block';document.getElementById('fs').textContent=score+' / '+NCH;
+const r=score/NCH;document.getElementById('fm').textContent=r>=.8?'Méthode maîtrisée.':r>=.5?'Les bases sont là : reprenez les étapes où une valeur était fausse.':'Reprenez la méthode en six étapes du book avant de recommencer.';f.scrollIntoView({behavior:'smooth'})}}
+function rendre(){const box=document.getElementById('qs');box.innerHTML='';fait=0;score=0;document.getElementById('fin').style.display='none';
+ETAPES.forEach((e,n)=>{const q=document.createElement('div');q.className='q';
+q.innerHTML='<h3>'+e.titre+'</h3>'+(e.intro?'<p>'+e.intro+'</p>':'')+e.champs.map((c,i)=>'<div class="champ"><span class="l">'+c.l+'</span>'+
+(c.o?'<select><option value="">— choisir —</option>'+c.o.map((t,k)=>'<option value="'+k+'">'+t+'</option>').join('')+'</select>':'<input inputmode="decimal" autocomplete="off">')+
+'<span class="att">attendu : '+(c.o?c.o[c.r]:c.aff)+'</span></div>').join('')+'<button>Valider l\'étape</button><div class="fb"></div>';
+const btn=q.querySelector('button'),fb=q.querySelector('.fb'),zs=[...q.querySelectorAll('.champ')];
+btn.onclick=()=>{const vals=zs.map(z=>z.querySelector('input,select').value.trim());
+if(vals.some(v=>v==='')){fb.className='fb ko';fb.textContent='Complétez toutes les valeurs avant de valider.';return}
+let ok=0;e.champs.forEach((c,i)=>{const v=vals[i];const b=c.o?(+v===c.r):(Math.abs(num(v)-c.r)<=(c.t||0.005));zs[i].classList.add(b?'bon':'faux');if(b)ok++;zs[i].querySelector('input,select').disabled=true});
+btn.disabled=true;btn.textContent='Atelier validé';fb.className='fb '+(ok===e.champs.length?'ok':'ko');
+fb.innerHTML='<b>'+ok+' / '+e.champs.length+'.</b> '+e.expl;fait++;score+=ok;maj()};box.appendChild(q)});maj()}
+document.getElementById('rejouer').onclick=()=>{rendre();window.scrollTo({top:0,behavior:'smooth'})};rendre();
+</script></body></html>
